@@ -1,8 +1,10 @@
 <?php
 
+// Set currency values $from and $to
 $from = "EUR";
 $to = "USD";
 
+// XE.COM URL
 $link = "https://www.xe.com/currencyconverter/convert/?Amount=1&From=".$from."&To=".$to;
 
 $html_content = file_get_contents($link);
@@ -12,6 +14,7 @@ $substr_html_content = strstr($html_content, '<p class="result__BigRate-sc-1bsij
 $substr_html_content = strstr($substr_html_content, '>');
 $end_position = strpos($substr_html_content, '<span class="faded-digits">');
 
+// Print result
 if($end_position){
     $exchange_rate = substr($substr_html_content, 1, $end_position-1);
     var_dump("1 ".$from." = ".$exchange_rate." ".$to);
